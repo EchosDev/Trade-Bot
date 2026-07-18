@@ -1,0 +1,34 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Giriş";
+}
+
+<div class="auth-wrap">
+    <div class="auth-card">
+        <h2>Xoş gəldin</h2>
+        <p class="auth-sub">Hesabına daxil ol və botunu idarə et.</p>
+
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <label class="field-label" asp-for="Username"></label>
+            <input asp-for="Username" class="field" autocomplete="username" />
+            <span asp-validation-for="Username" class="field-validation-error"></span>
+
+            <label class="field-label" asp-for="Password"></label>
+            <input asp-for="Password" type="password" class="field" autocomplete="current-password" />
+            <span asp-validation-for="Password" class="field-validation-error"></span>
+
+            <label class="checkbox-row">
+                <input asp-for="RememberMe" type="checkbox" />
+                <span>Məni xatırla</span>
+            </label>
+
+            <button type="submit" class="btn btn-primary btn-block">Daxil ol</button>
+        </form>
+
+        <p class="auth-footer-link">
+            Hesabın yoxdur? <a asp-controller="auth" asp-action="register">Qeydiyyatdan keç</a>
+        </p>
+    </div>
+</div>

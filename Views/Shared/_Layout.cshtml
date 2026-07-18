@@ -1,0 +1,61 @@
+﻿<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridTrade — Grid Bot Paneli</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+
+    <div class="app">
+
+        <!-- ============ TOP BAR ============ -->
+        <header class="topbar">
+            <a asp-controller="home" asp-action="index" class="brand">
+                <span class="brand-mark">⌁</span>
+                <span style="color:#fff" class="brand-name">GRID<span class="accent">TRADE</span></span>
+            </a>
+
+            <div class="topbar-right">
+
+                @if (User.Identity.IsAuthenticated)
+                {
+
+
+                    <div class="pill" id="connPill">
+                        <span class="dot dot-muted"></span>
+                        <span id="connText">Backend yoxlanılır…</span>
+                    </div>
+                    <div class="pill pill-strong" id="botPill">
+                        <span class="dot dot-off" id="botDot"></span>
+                        <span id="botText">BOT DAYANDIRILIB</span>
+                    </div>
+
+                    <div class="pill" id="userPill">
+                        <span id="userNameText">@User.Identity.Name</span>
+                    </div>
+
+                    <a asp-controller="auth" asp-action="logout" class="btn btn-danger">Çıxış</a>
+                }
+                else
+                {
+                    <a asp-controller="auth" asp-action="login" class="btn btn-info">Giriş</a>
+                    <a asp-controller="auth" asp-action="register" class="btn btn-warning">Qeydiyyat</a>
+                }
+            </div>
+        </header>
+
+            @RenderBody()
+        <footer class="app-footer">
+            App Designed By Echos
+        </footer>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/app.js"></script>
+</body>
+</html>

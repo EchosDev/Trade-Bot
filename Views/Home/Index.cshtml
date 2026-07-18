@@ -1,0 +1,226 @@
+﻿@{
+    ViewData["Title"] = "Panel";
+}
+
+<div class="layout">
+
+    <!-- ============ LEFT PANEL — CONFIG ============ -->
+    <aside class="panel side-panel">
+
+        <section class="block">
+            <div class="block-head">
+                <h2>Bazar növü</h2>
+                <span class="block-num">00</span>
+            </div>
+
+            <div class="btn-grid" style="grid-template-columns:1fr 1fr;">
+                <button type="button" class="btn btn-secondary market-type-btn is-active" data-value="spot" id="marketSpotBtn">Spot</button>
+                <button type="button" class="btn btn-ghost market-type-btn" data-value="futures" id="marketFuturesBtn">Futures</button>
+            </div>
+            <input type="hidden" id="marketType" value="spot">
+
+            <div id="leverageBlock" style="display:none; margin-top:14px;">
+                <label class="field-label">Leverage (x1 - x125)</label>
+                <input class="field field-mono" id="leverageInput" type="number" min="1" max="125" value="1">
+            </div>
+        </section>
+
+        <section class="block">
+            <div class="block-head">
+                <h2>API girişi</h2>
+                <span class="block-num">01</span>
+            </div>
+            <label class="field-label" for="apiKey">API Key</label>
+            <input class="field" id="apiKey" type="text" autocomplete="off" placeholder="Binance API açarınız">
+
+            <label class="field-label" for="apiSecret">API Secret</label>
+            <input class="field" id="apiSecret" type="password" autocomplete="off" placeholder="Binance gizli açarınız">
+
+            <button class="btn btn-ghost btn-block" id="saveKeysBtn">Açarları yadda saxla</button>
+        </section>
+
+        <section class="block">
+            <div class="block-head">
+                <h2>Grid sifariş</h2>
+                <span class="block-num">02</span>
+            </div>
+
+            <label class="field-label" for="symbolTrigger">Cüt (simvol)</label>
+            <div class="custom-select" id="symbolSelect">
+                <button type="button" class="custom-select-trigger field field-mono" id="symbolTrigger">
+                    <span id="symbolLabel">BTC / USDT</span>
+                    <svg class="custom-select-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                        <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div class="custom-select-panel" id="symbolPanel" hidden>
+                    <div class="custom-select-option is-selected" data-value="BTCUSDT">BTC / USDT</div>
+                    <div class="custom-select-option" data-value="ETHUSDT">ETH / USDT</div>
+                    <div class="custom-select-option" data-value="BNBUSDT">BNB / USDT</div>
+                    <div class="custom-select-option" data-value="SOLUSDT">SOL / USDT</div>
+                    <div class="custom-select-option" data-value="XRPUSDT">XRP / USDT</div>
+                    <div class="custom-select-option" data-value="ADAUSDT">ADA / USDT</div>
+                    <div class="custom-select-option" data-value="DOGEUSDT">DOGE / USDT</div>
+                    <div class="custom-select-option" data-value="TRXUSDT">TRX / USDT</div>
+                    <div class="custom-select-option" data-value="TONUSDT">TON / USDT</div>
+                    <div class="custom-select-option" data-value="AVAXUSDT">AVAX / USDT</div>
+                    <div class="custom-select-option" data-value="DOTUSDT">DOT / USDT</div>
+                    <div class="custom-select-option" data-value="LINKUSDT">LINK / USDT</div>
+                    <div class="custom-select-option" data-value="MATICUSDT">MATIC / USDT</div>
+                    <div class="custom-select-option" data-value="LTCUSDT">LTC / USDT</div>
+                    <div class="custom-select-option" data-value="BCHUSDT">BCH / USDT</div>
+                    <div class="custom-select-option" data-value="NEARUSDT">NEAR / USDT</div>
+                    <div class="custom-select-option" data-value="ATOMUSDT">ATOM / USDT</div>
+                    <div class="custom-select-option" data-value="UNIUSDT">UNI / USDT</div>
+                    <div class="custom-select-option" data-value="ETCUSDT">ETC / USDT</div>
+                    <div class="custom-select-option" data-value="FILUSDT">FIL / USDT</div>
+                    <div class="custom-select-option" data-value="APTUSDT">APT / USDT</div>
+                    <div class="custom-select-option" data-value="ARBUSDT">ARB / USDT</div>
+                    <div class="custom-select-option" data-value="MYXUSDT">MYX / USDT</div>
+                    <div class="custom-select-option" data-value="ZEREBROUSDT">ZEREBRO / USDT</div>
+                    <div class="custom-select-option" data-value="PIPPINUSDT">PIPPIN / USDT</div>
+
+                    <div class="custom-select-divider"></div>
+                    <div class="custom-select-add" id="symbolAddTrigger">
+                        <span>+ Digər coin əlavə et</span>
+                    </div>
+                    <div class="custom-select-add-form" id="symbolAddForm" hidden>
+                        <input type="text" class="custom-select-add-input" id="symbolAddInput"
+                               placeholder="məs: SHIB" maxlength="12" autocomplete="off">
+                        <button type="button" class="custom-select-add-confirm" id="symbolAddConfirm">Əlavə et</button>
+                    </div>
+                </div>
+                <select id="symbol" hidden aria-hidden="true" tabindex="-1">
+                    <option value="BTCUSDT">BTC / USDT</option>
+                    <option value="ETHUSDT">ETH / USDT</option>
+                    <option value="BNBUSDT">BNB / USDT</option>
+                    <option value="SOLUSDT">SOL / USDT</option>
+                    <option value="XRPUSDT">XRP / USDT</option>
+                    <option value="ADAUSDT">ADA / USDT</option>
+                    <option value="DOGEUSDT">DOGE / USDT</option>
+                    <option value="TRXUSDT">TRX / USDT</option>
+                    <option value="TONUSDT">TON / USDT</option>
+                    <option value="AVAXUSDT">AVAX / USDT</option>
+                    <option value="DOTUSDT">DOT / USDT</option>
+                    <option value="LINKUSDT">LINK / USDT</option>
+                    <option value="MATICUSDT">MATIC / USDT</option>
+                    <option value="LTCUSDT">LTC / USDT</option>
+                    <option value="BCHUSDT">BCH / USDT</option>
+                    <option value="NEARUSDT">NEAR / USDT</option>
+                    <option value="ATOMUSDT">ATOM / USDT</option>
+                    <option value="UNIUSDT">UNI / USDT</option>
+                    <option value="ETCUSDT">ETC / USDT</option>
+                    <option value="FILUSDT">FIL / USDT</option>
+                    <option value="APTUSDT">APT / USDT</option>
+                    <option value="ARBUSDT">ARB / USDT</option>
+                    <option value="MYXUSDT">MYX / USDT</option>
+                    <option value="ZEREBROUSDT">ZEREBRO / USDT</option>
+                    <option value="PIPPINUSDT">PIPPIN / USDT</option>
+                </select>
+            </div>
+
+            <div class="field-row">
+                <div>
+                    <label class="field-label field-label-buy">BUY qiymət</label>
+                    <input class="field field-mono" id="buyPrice" type="number" step="any" placeholder="0.00">
+                </div>
+                <div>
+                    <label class="field-label field-label-buy">BUY miqdar</label>
+                    <input class="field field-mono" id="buyQty" type="number" step="any" placeholder="0.00">
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div>
+                    <label class="field-label field-label-sell">SELL qiymət</label>
+                    <input class="field field-mono" id="sellPrice" type="number" step="any" placeholder="0.00">
+                </div>
+                <div>
+                    <label class="field-label field-label-sell">SELL miqdar</label>
+                    <input class="field field-mono" id="sellQty" type="number" step="any" placeholder="0.00">
+                </div>
+            </div>
+
+            <label class="checkbox-row">
+                <input type="checkbox" id="repeatToggle">
+                <span>SELL icra olunandan sonra dövrü təkrarla</span>
+            </label>
+
+            <div class="btn-grid">
+                <button class="btn btn-primary" id="addOrderBtn">+ Əlavə et</button>
+                <button class="btn btn-secondary" id="editOrderBtn">Dəyiş</button>
+                <button class="btn btn-danger" id="removeOrderBtn">Sil</button>
+            </div>
+
+            <p class="hint" id="selectedHint">Cədvəldən sətir seçsəniz, forma avtomatik dolur.</p>
+        </section>
+
+        <section class="block block-controls">
+            <div class="block-head">
+                <h2>İdarəetmə</h2>
+                <span class="block-num">03</span>
+            </div>
+            <div class="btn-grid">
+                <button class="btn btn-buy" id="startBotBtn">▶ Başlat</button>
+                <button class="btn btn-sell" id="stopBotBtn">■ Dayandır</button>
+            </div>
+        </section>
+
+    </aside>
+
+    <!-- ============ MAIN PANEL — ORDERS + LOG ============ -->
+    <main class="panel main-panel">
+
+        <section class="block">
+            <div class="block-head">
+                <h2>Aktiv sifarişlər</h2>
+                <span class="count-badge" id="orderCount">0</span>
+            </div>
+
+            <div class="table-scroll">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Simvol</th>
+                            <th>Bazar</th>
+                            <th>BUY qiymət</th>
+                            <th>BUY miqdar</th>
+                            <th>SELL qiymət</th>
+                            <th>SELL miqdar</th>
+                            <th>Təkrar</th>
+                            <th>Status</th>
+                            <th>Ladder</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersBody"></tbody>
+                </table>
+                <div class="empty-state" id="emptyState">
+                    <p>Hələ heç bir grid sifariş yoxdur.</p>
+                    <span>Sol paneldən BUY/SELL qiymətlərini daxil edib "Əlavə et" düyməsinə basın.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="block block-log">
+            <h2>Jurnal</h2>
+            <div style="display:flex; gap:6px;">
+                <button class="btn btn-ghost btn-small" id="clearLogBtn">Ekranı təmizlə</button>
+                <button class="btn btn-danger btn-small" id="clearLogDbBtn" style="background:var(--sell); color:#2B0709; border:none;">Hamısını sil</button>
+            </div>
+            <div class="terminal" id="logBox"></div>
+        </section>
+
+    </main>
+</div>
+
+<!-- ============ TƏSDİQ MODALI (jurnal təmizləmə üçün) ============ -->
+<div class="modal-overlay" id="confirmModalOverlay" hidden>
+    <div class="modal-box">
+        <h3 id="confirmModalTitle">Əminsiniz?</h3>
+        <p id="confirmModalText">Bu əməliyyat geri qaytarıla bilməz.</p>
+        <div class="modal-actions">
+            <button type="button" class="btn btn-ghost" id="confirmModalCancel">Ləğv et</button>
+            <button type="button" class="btn btn-danger" id="confirmModalConfirm">Bəli, təmizlə</button>
+        </div>
+    </div>
+</div>

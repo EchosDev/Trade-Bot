@@ -1,0 +1,33 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Qeydiyyat";
+}
+
+<div class="auth-wrap">
+    <div class="auth-card">
+        <h2>Hesab yarat</h2>
+        <p class="auth-sub">Bir neçə saniyədə qeydiyyatdan keç.</p>
+
+        <form asp-action="Register" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <label class="field-label" asp-for="Username"></label>
+            <input asp-for="Username" class="field" autocomplete="email" />
+            <span asp-validation-for="Username" class="field-validation-error"></span>
+
+            <label class="field-label" asp-for="Password"></label>
+            <input asp-for="Password" type="password" class="field" autocomplete="new-password" />
+            <span asp-validation-for="Password" class="field-validation-error"></span>
+
+            <label class="field-label" asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" type="password" class="field" autocomplete="new-password" />
+            <span asp-validation-for="ConfirmPassword" class="field-validation-error"></span>
+
+            <button type="submit" class="btn btn-primary btn-block">Qeydiyyatdan keç</button>
+        </form>
+
+        <p class="auth-footer-link">
+            Artıq hesabın var? <a asp-controller="auth" asp-action="login">Daxil ol</a>
+        </p>
+    </div>
+</div>
